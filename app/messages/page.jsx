@@ -5,6 +5,6 @@ import {useEffect, useState} from "react";
 export default function Page() {
 
     return (
-        <h1>Page with!</h1>
+        <h1>Page</h1>
     )
 }

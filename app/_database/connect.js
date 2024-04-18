@@ -1,15 +1,33 @@
+import {MongoClient, ServerApiVersion} from "mongodb";
 
+const uri = process.env.MONGO;
 
-export default async function callMongoDB()  {
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+    serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+    }
+});
+let mongoClient;
 
+export default async function connectToMongoDB() {
 
-    const isServer = process.env.IS_SERVER_FLAG ? 'RUN ON SERVER' : 'RUN_ON_CLIENT'
-
-    console.log("trying to connect")
-    const res = await fetch("http://localhost:3000/api/database")
-    const data = await res.json()
-    console.log(isServer)
-    console.log(data)
-    console.log(Response.json({ data }))
-    return Response.json({ data })
+    if (mongoClient) {
+        console.log("Using existing MongoDB connection");
+        return mongoClient;
+    } else {
+        try {
+            // Connect the client to the server (optional starting in v4.7)
+            await client.connect();
+            // Assign the established connection to mongoClient
+            mongoClient = client;
+            console.log("New MongoDB connection established");
+        } catch (error) {
+            console.error("Failed to connect to MongoDB", error);
+            throw new Error('MongoDB connection error');
+        }
+    }
+    return mongoClient;
 }

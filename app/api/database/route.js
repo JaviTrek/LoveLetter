@@ -1,30 +1,15 @@
+import connectToMongoDB from "@/app/_database/connect";
 
-import { MongoClient, ServerApiVersion } from 'mongodb';
-const uri = process.env.MONGO;
-
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-    }
-});
-
-export  async function GET() {
+export async function GET() {
     try {
-        // Connect the client to the server	(optional starting in v4.7)
-        await client.connect();
+        const client = await connectToMongoDB();
         // Send a ping to confirm a successful connection
         await client.db("admin").command({ ping: 1 });
-
-        console.log("Pinged your deployment. You successfully connected to MongoDB!");
-        return Response.json( "Connected successfully ")
-    } finally {
-        // Ensures that the client will close when you finish/error
-
-        await client.close();
+        console.log("Correclty pinged deployment");
+        return new Response( JSON.stringify({ myRes: "Pinged your deployment. You successfully connected to MongoDB!" }))
+//        return { status: 200, body: "Pinged your deployment. You successfully connected to MongoDB!" };
+    } catch (error) {
+        console.error("Connection to MongoDB failed", error);
+        return { status: 500, body: "Failed to connect to MongoDB" };
     }
 }
-
-

@@ -1,11 +1,17 @@
+"use client"
+
+import {useEffect, useState} from "react";
+
 async function callMongoDB()  {
 
     const isServer = process.env.IS_SERVER_FLAG ? 'RUN ON SERVER' : 'RUN_ON_CLIENT'
 
     console.log("trying to connect")
     const res = await fetch("http://localhost:3000/api/database")
+    console.log(res)
     const data = await res.json()
     console.log(isServer)
+
     console.log(data)
    // console.log(Response.json({ data }))
     return data;
@@ -13,14 +19,25 @@ async function callMongoDB()  {
 
 
 // children = will be a page or nested layout
-export default async function Page({children,  }) {
+export default function Page({children,  }) {
+let [data, setData] = useState("loading...");
 
-    const mongoData =  await callMongoDB();
-    console.log("mongoData")
-    console.log(mongoData)
+useEffect( ()=> {
+
+
+
+    async function call() {
+        console.log("call use effect")
+        const newData = await  callMongoDB()
+        setData(newData.myRes)
+    }
+    call()
+
+},[])
 
     return (<>
             <h1>Layout</h1>
+             {data}
             {children}
         </>)
 }
