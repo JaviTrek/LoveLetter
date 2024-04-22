@@ -1,9 +1,9 @@
 "use client"
 
-import {useEffect, useState} from "react";
+import {Suspense, useEffect, useState} from "react";
 import {redirect, useSearchParams} from "next/navigation";
 
-async function callMongoDB()  {
+async function callMongoDB() {
 
     const isServer = process.env.IS_SERVER_FLAG ? 'RUN ON SERVER' : 'RUN_ON_CLIENT'
 
@@ -14,12 +14,12 @@ async function callMongoDB()  {
     console.log(isServer)
 
     console.log(data)
-   // console.log(Response.json({ data }))
+    // console.log(Response.json({ data }))
     return data;
 }
 
 // children = will be a page or nested layout
-export default function Page({children,  }) {
+export default function Page({children}) {
 
     const searchParams = useSearchParams()
 
@@ -28,25 +28,26 @@ export default function Page({children,  }) {
     if (search !== "spooder" && search !== "baguette") redirect("/")
 
 
+    let [data, setData] = useState("loading...");
 
-let [data, setData] = useState("loading...");
-
-useEffect( ()=> {
-
+    useEffect(() => {
 
 
-    async function call() {
-        console.log("call use effect")
-        const newData = await  callMongoDB()
-        setData(newData.myRes)
-    }
-    call()
+        async function call() {
+            console.log("call use effect")
+            const newData = await callMongoDB()
+            setData(newData.myRes)
+        }
 
-},[])
+        call()
+
+    }, [])
 
     return (<>
+        <Suspense fallback={<div>Loading...</div>}>
             <h1>Layout</h1>
-             {data}
+            {data}
             {children}
-        </>)
+        </Suspense>
+    </>)
 }
