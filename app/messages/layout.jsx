@@ -16,7 +16,7 @@ async function callMongoDB()  {
    // console.log(Response.json({ data }))
     return data;
 }
-
+//TODO: If search url does not have beeb parameter, redirect to home
 
 // children = will be a page or nested layout
 export default function Page({children,  }) {
