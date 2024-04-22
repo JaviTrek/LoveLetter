@@ -1,7 +1,8 @@
 "use client"
 
-import {Suspense, useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {redirect, useSearchParams} from "next/navigation";
+import {UserContext} from "@/app/UserContext";
 
 async function callMongoDB() {
 
@@ -21,17 +22,12 @@ async function callMongoDB() {
 // children = will be a page or nested layout
 export default function Page({children}) {
 
-    const searchParams = useSearchParams()
-
-    const search = searchParams.get('beeb')
-
-    if (search !== "spooder" && search !== "baguette") redirect("/")
-
+    const beeb = useContext(UserContext)
+    console.log(beeb)
 
     let [data, setData] = useState("loading...");
 
     useEffect(() => {
-
 
         async function call() {
             console.log("call use effect")
@@ -43,11 +39,14 @@ export default function Page({children}) {
 
     }, [])
 
-    return (<>
-        <Suspense fallback={<div>Loading...</div>}>
-            <h1>Layout</h1>
-            {data}
-            {children}
-        </Suspense>
-    </>)
+    return (
+        <>
+            <UserContext.Provider value={ "baguette" }>
+                <h1>Layout</h1>
+                {data}
+                {children}
+            </UserContext.Provider>
+        </>
+    )
+
 }
