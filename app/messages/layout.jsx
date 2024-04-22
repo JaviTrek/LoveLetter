@@ -1,6 +1,7 @@
 "use client"
 
 import {useEffect, useState} from "react";
+import {redirect, useSearchParams} from "next/navigation";
 
 async function callMongoDB()  {
 
@@ -16,10 +17,18 @@ async function callMongoDB()  {
    // console.log(Response.json({ data }))
     return data;
 }
-//TODO: If search url does not have beeb parameter, redirect to home
 
 // children = will be a page or nested layout
 export default function Page({children,  }) {
+
+    const searchParams = useSearchParams()
+
+    const search = searchParams.get('beeb')
+
+    if (search !== "spooder" && search !== "baguette") redirect("/")
+
+
+
 let [data, setData] = useState("loading...");
 
 useEffect( ()=> {
