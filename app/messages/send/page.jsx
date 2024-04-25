@@ -1,5 +1,5 @@
 export default function Page() {
     return (
-        <h1>Page with slug!</h1>
+        <h1>Sennd page</h1>
     )
 }

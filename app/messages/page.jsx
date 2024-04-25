@@ -1,17 +1,24 @@
-"use client"
-import {useContext, useEffect, useState} from "react";
-import {UserContext} from "@/app/UserContext";
+import {getUser} from "@/app/lib";
 
 
-export default function Page() {
+export default async function Page() {
 
-    const beeb = useContext(UserContext)
+
+    const user = await getUser();
+    console.log("user log messages")
+    console.log(user)
+
+
+
     return (
         <>
 
-                <h1>Pageeeeeeeeeeeeeeeeeeee</h1>
-                {beeb}
+                <h1>Layout</h1>
+
+                {user}
+            <h1>aaa</h1>
 
         </>
     )
+
 }
