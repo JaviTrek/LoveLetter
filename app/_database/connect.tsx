@@ -10,7 +10,7 @@ const client = new MongoClient(uri, {
         deprecationErrors: true,
     }
 });
-let mongoClient;
+let mongoClient: MongoClient;
 
 export default async function connectToMongoDB() {
 

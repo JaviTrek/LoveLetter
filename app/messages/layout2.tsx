@@ -1,4 +1,4 @@
-import {getUser} from "@/app/lib";
+
 
 
 
@@ -19,6 +19,9 @@ import {getUser} from "@/app/lib";
 }*/
 
 // children = will be a page or nested layout
+import {useEffect, useState} from "react";
+import {getUser} from "../lib";
+
 export default async function Page({children}) {
 
 

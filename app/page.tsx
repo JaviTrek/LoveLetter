@@ -1,8 +1,9 @@
 "use client"
 
 import Image from "next/image";
-import {setUser} from "@/app/lib";
+
 import {useRouter} from "next/navigation";
+import {setUser} from "./lib";
 
 
 export default function Home() {
