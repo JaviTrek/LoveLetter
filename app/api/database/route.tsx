@@ -1,6 +1,6 @@
 import connectToMongoDB from "../../_database/connect";
 
-export async function GET() {
+export async function GET(): Promise<Response> {
     try {
         const client = await connectToMongoDB();
         // Send a ping to confirm a successful connection
@@ -10,6 +10,6 @@ export async function GET() {
 //        return { status: 200, body: "Pinged your deployment. You successfully connected to MongoDB!" };
     } catch (error) {
         console.error("Connection to MongoDB failed", error);
-        return { status: 500, body: "Failed to connect to MongoDB" };
+        return new Response( JSON.stringify({ myRes: "Error, no connection" }))
     }
 }

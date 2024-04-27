@@ -13,6 +13,7 @@ export default async function Page() {
                 <h1>Layout</h1>
 
             <Menu user="spooder" />
+            {user}
             <h1>aaa</h1>
 
         </>
