@@ -22,6 +22,7 @@ export default function Menu({user}: Props) {
             <button>
                 Write
             </button>
+
         </div>
     )
 }

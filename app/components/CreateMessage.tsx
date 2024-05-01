@@ -1,0 +1,1 @@
+//this component will display the form to create the message
