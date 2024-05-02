@@ -27,6 +27,7 @@ async function getUserCollection(user:user) {
 export async function getMyMessages(user:user) {
 
     const col = await getUserCollection(user);
+    return col.find();
 
 }
 
@@ -36,7 +37,7 @@ export async function getBeboMessages(user: user) {
     const bebo = user === "spooder" ?  "baguette" : "spooder";
     const col = await getUserCollection(bebo);
 
-
-    console.log("inserted into DB")
+    const query = { date: { $lt: new Date } };
+    return await col.find(query).toArray()
 
 }
