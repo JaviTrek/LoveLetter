@@ -1,23 +1,31 @@
+"use server"
 import connectToMongoDB from "./connect";
-import {MongoClient} from "mongodb";
+import {MongoClient, ObjectId} from "mongodb";
 
 export type user = "spooder" | "baguette"
-export async function sendMessage(message: string, user: user, date: Date) {
 
-    console.log("send message running")
+export interface message {
+    _id?: ObjectId,
+    theme: string
+    user: user,
+    content: string,
+    date: Date
+}
 
+export async function sendMessage(message:message) {
+
+    console.log("sendmessage called")
     const client: MongoClient = await connectToMongoDB();
     // database and collection code goes here
     const db = client.db("messages");
-    const col = db.collection(user);
+    const col = db.collection(message.user);
 
-    await col.insertOne({user, message, date});
+    await col.insertOne({...message});
 
     console.log("inserted into DB")
-
 }
 
-async function getUserCollection(user:user) {
+export async function getUserCollection(user:user) {
     const client: MongoClient = await connectToMongoDB();
     // database and collection code goes here
     const db = client.db("messages");
@@ -27,7 +35,7 @@ async function getUserCollection(user:user) {
 export async function getMyMessages(user:user) {
 
     const col = await getUserCollection(user);
-    return col.find();
+    return col.find().toArray();
 
 }
 

@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
   return (
 
       <html lang="en">
-      <body className={`${inter.className} text-center flex flex-col min-h-screen overflow-hidden`}>
+      <body className={`${inter.className} text-center flex flex-col  `}>
       <nav className="bg-green-950 *:p-4 p-4">
           <a href="/">Home</a>
           <a href="/messages">Your Messages</a>

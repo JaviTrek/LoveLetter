@@ -10,5 +10,5 @@ export async function getUser() {
     const currentUser = cookies().get("user").value;
     if (currentUser === "spooder" || currentUser === "baguette") {
         return currentUser;
-    }
+    } else return null;
 }
