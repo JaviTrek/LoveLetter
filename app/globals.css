@@ -19,9 +19,13 @@ a {
     --background-end-rgb: 10, 21, 18;
   }
 }
-@layer {
+@layer components{
   h1 {
-    @apply text-4xl
+    @apply sm:text-4xl p-2
+  }
+
+  p, input, textarea {
+    @apply text-sm
   }
 
 }
