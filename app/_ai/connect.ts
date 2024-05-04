@@ -5,7 +5,7 @@ const openai = new OpenAI({
 });
 
 export async function getAI(content: string, theme: string) {
-
+    console.log("AI FUNCTION RUNNING-----------")
 
     const getTitle = await openai.chat.completions.create({
         messages: [{ role: "system", content:

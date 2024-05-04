@@ -4,6 +4,8 @@ import {useState} from "react";
 import CreateMessage from "./CreateMessage";
 import {getBeboMessages, message, user} from "../_database/messages";
 import LoveMessage from "./LoveMessage";
+import {useRouter} from "next/navigation";
+import {setUser} from "../lib";
 
 interface Props {
     user: user
@@ -14,18 +16,18 @@ interface Props {
 
 
 export default function Menu({user, messages}: Props) {
-
+    const router = useRouter()
 
     const [messageDisplay, setMessageDisplay] = useState("read")
 
     return(
         <div>
 
-            <div className="flex justify-center align-middle bg-green-800 *:py-4 *:grow *:duration-300">
+            <div className="flex justify-center align-middle bg-green-800 *:py-4  *:duration-300">
 
 
                 <button
-                    className={`group  relative ${messageDisplay === "read" ? "bg-green-700" : "bg-green-700 brightness-50"}`}
+                    className={`group  grow relative ${messageDisplay === "read" ? "bg-green-700" : "bg-green-700 brightness-50"}`}
                     onClick={() => {
                         setMessageDisplay("read")
                     }}> Read Messages
@@ -33,11 +35,20 @@ export default function Menu({user, messages}: Props) {
 
 
                 <button
-                    className={`  relative ${messageDisplay === "write" ? "bg-green-700" : "bg-green-700 brightness-50"}`}
+                    className={`  relative grow ${messageDisplay === "write" ? "bg-green-700" : "bg-green-700 brightness-50"}`}
                     onClick={() => {
                         setMessageDisplay("write")
                     }}>
                     Write Message
+                </button>
+
+                <button
+                    className={` bg-red-600 px-2 brightness-50 hover:brightness-100 text-sm`}
+                    onClick={async () => {
+                        await setUser(null)
+                        router.push("/")
+                    }}>
+                   LOG OUT
                 </button>
 
 
@@ -49,7 +60,7 @@ export default function Menu({user, messages}: Props) {
 
                     {messages.map((message, index) => (
 
-                            <LoveMessage user={user} content={message.content} date={message.date} title={message.title}
+                        <LoveMessage user={user} content={message.content} date={message.date} title={message.title}
                                          aiTheme={message.aiTheme} key={index}/>
 
 
