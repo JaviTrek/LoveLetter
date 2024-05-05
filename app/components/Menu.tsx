@@ -55,17 +55,21 @@ export default function Menu({user, messages}: Props) {
             </div>
             {messageDisplay === "read" ?
 
-                //we are reading messages
-                <div className="flex justify-center align-middle bg-green-800 rounded-xl p-4 ">
+<div>
+                <h1 className="text-left p-4 sm:p-10">My messages</h1>
+
+                <div className="flex flex-col sm:flex-row  gap-8 sm:m-10 justify-center align-middle rounded-xl p-4 ">
+
 
                     {messages.map((message, index) => (
 
                         <LoveMessage user={user} content={message.content} date={message.date} title={message.title}
-                                         aiTheme={message.aiTheme} key={index}/>
+                                     key={index} colors={message.colors} theme="banana"/>
 
 
                     ))}
                 </div>
+</div>
 
                 :
 

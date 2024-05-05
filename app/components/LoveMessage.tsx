@@ -32,27 +32,22 @@ export default function Page() {
 
 
 
-interface ThemeColors {
-    primary: string;
-    secondary: string;
-    font: string;
-}
+
 
 interface MessageProps {
     theme: string;
     content: string;
     user: string;
-    date: string;
+    date: Date;
     title: string;
-    aiTheme: {
-        colors: ThemeColors;
-    };
+    colors: string;
 }
 
-export default function LoveMessage({ content, user, date, title, aiTheme }) {
-    const { colors } = aiTheme;
+export default function LoveMessage({ content, user, date, title, colors }: MessageProps) {
 
 
+
+    //tailwind cannot dynamically set a class, but if we create these "pre-sets" then it will be able to
     const colorVariants = {
         blue: 'bg-blue-600 hover:bg-blue-500 text-white',
         red: 'bg-red-500 hover:bg-red-400 text-white',
@@ -76,11 +71,12 @@ export default function LoveMessage({ content, user, date, title, aiTheme }) {
         sky: 'bg-sky-500 hover:bg-sky-400 text-white',
     };
 
+    console.log(colors)
     return (
-        <div className={`${colorVariants[colors.primary]}  p-5 rounded-lg max-w-md mx-auto duration-300 cursor-pointer`}>
+        <div className={`${colorVariants[colors]}  p-5 rounded-lg max-w-md mx-auto duration-300 cursor-pointer`}>
             <h2 className={` text-lg font-bold`}>{title}</h2>
             <p className={` text-base my-2`}>{content}</p>
-            <p className={` text-sm italic`}>Sent by {user} on {date}</p>
+            <p className={` text-sm italic`}>Sent by {user} on {date.toString()}</p>
         </div>
     );
 };

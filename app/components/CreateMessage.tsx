@@ -1,7 +1,6 @@
 "use client"
 import {sendMessage, user} from "../_database/messages";
 import {useState} from "react";
-import {getAI} from "../_ai/connect";
 
 interface Props {
     user: user

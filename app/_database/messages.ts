@@ -1,7 +1,7 @@
 "use server"
 import connectToMongoDB from "./connect";
 import {MongoClient, ObjectId} from "mongodb";
-import {getAI} from "../_ai/connect";
+import {getAI, getAITitleColor} from "../_ai/connect";
 
 export type user = "spooder" | "baguette"
 
@@ -9,15 +9,9 @@ export interface message {
     _id?: ObjectId,
     user: user,
     theme: string,
-    aiTheme?: {
-        colors?: { //ai
-            primary: string,
-            secondary: string,
-            font: string
-        },
-        mainImage?: string, //ai + s3
-        bgImage?: string, //ai + s3
-    }
+    colors?: string //ai
+    mainImage?: string, //ai + s3
+    bgImage?: string, //ai + s3
     title?: string, //ai
     content: string,
     date: Date
@@ -29,19 +23,10 @@ export async function sendMessage(message:message) {
     const db = client.db("messages");
     const col = db.collection(message.user);
 
-    const ai = await getAI(message.content, message.theme)
-    const colors = ai.colors.color
-    message.title = ai.title.title;
+    const ai = await getAITitleColor(message.content, message.theme)
+    message.colors = ai.color
+    message.title = ai.title;
 
-    message.aiTheme = {
-
-        colors: {
-            primary: colors.primary,
-            secondary: colors.secondary,
-            font: colors.font,
-
-        }
-    }
     console.log(message)
     await col.insertOne({...message});
 
