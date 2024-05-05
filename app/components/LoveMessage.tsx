@@ -1,38 +1,5 @@
-/*// this component will display messages
-
-export default function Page() {
-
-
-    /!*
-    * Message Contents ------
-    *
-    *
-    * Icon on corner
-    * Title - Date issued
-    * Message
-    * Date meant to be read
-    *
-    *
-    * END-
-    *
-    * Message Types:
-    *
-    * Love, Support, Congratulations, Miss you
-    *
-    * *!/
-
-    return (
-        <div className="flex flex-col items-center justify-center w-full">
-            <p> Paragraph</p>
-
-        </div>
-    )
-}*/
-
-
-
-
-
+import {useState} from "react";
+import Image from "next/image";
 
 interface MessageProps {
     theme: string;
@@ -71,13 +38,30 @@ export default function LoveMessage({ content, user, date, title, colors }: Mess
         sky: 'bg-sky-500 hover:bg-sky-400 text-white',
     };
 
+    const [display, setDisplay] = useState(false)
+
+    function switchDisplay() {
+        console.log("clicked!")
+        setDisplay(!display)
+    }
+
     console.log(colors)
     return (
-        <div className={`${colorVariants[colors]}  p-5 rounded-lg max-w-md mx-auto duration-300 cursor-pointer`}>
-            <h2 className={` text-lg font-bold`}>{title}</h2>
-            <p className={` text-base my-2`}>{content}</p>
-            <p className={` text-sm italic`}>Sent by {user} on {date.toString()}</p>
+        <div className={`${display ? `absolute top-0 left-0  p-4 m-auto w-full h-full bg-black bg-opacity-75` : ""} text-left`} onClick={() => switchDisplay()}>
+
+
+            <div className={`${colorVariants[colors]} flex h-full p-5 rounded-lg max-w-md mx-auto duration-300 cursor-pointer`} >
+                <Image src={`/LLLogo.webp`} className="p-2 bg-fuchsia-300" alt="" width={150} height={150}/>
+                <div className="p-4 truncate">
+                    <h2 className={` text-lg font-bold`}>{title}</h2>
+                    <p className={` text-base my-2`}>{content}</p>
+                    <p className={` text-sm italic`}>Sent by {user} on {date.toString()}</p>
+                </div>
+
+
+            </div>
         </div>
+
     );
 };
 
