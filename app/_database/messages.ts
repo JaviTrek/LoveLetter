@@ -1,7 +1,7 @@
 "use server"
 import connectToMongoDB from "./connect";
 import {MongoClient, ObjectId} from "mongodb";
-import {getAI, getAITitleColor} from "../_ai/connect";
+import { getAITitleColor} from "../_ai/connect";
 
 export type user = "spooder" | "baguette"
 
@@ -27,10 +27,8 @@ export async function sendMessage(message:message) {
     message.colors = ai.color
     message.title = ai.title;
 
-    console.log(message)
     await col.insertOne({...message});
 
-    console.log("inserted into DB")
 }
 
 export async function getUserCollection(user:user) {

@@ -16,26 +16,26 @@ export default function LoveMessage({ content, user, date, title, colors }: Mess
 
     //tailwind cannot dynamically set a class, but if we create these "pre-sets" then it will be able to
     const colorVariants = {
-        blue: 'bg-blue-600 hover:bg-blue-500 text-white',
-        red: 'bg-red-500 hover:bg-red-400 text-white',
-        yellow: 'bg-yellow-400 hover:bg-yellow-300 text-black',
-        green: 'bg-green-500 hover:bg-green-400 text-white',
-        indigo: 'bg-indigo-500 hover:bg-indigo-400 text-white',
-        purple: 'bg-purple-500 hover:bg-purple-400 text-white',
-        pink: 'bg-pink-500 hover:bg-pink-400 text-white',
-        teal: 'bg-teal-500 hover:bg-teal-400 text-white',
-        orange: 'bg-orange-500 hover:bg-orange-400 text-white',
-        gray: 'bg-gray-500 hover:bg-gray-400 text-white',
-        black: 'bg-black hover:bg-gray-800 text-white',
-        white: 'bg-white hover:bg-gray-100 text-black',
-        amber: 'bg-amber-500 hover:bg-amber-400 text-black',
-        cyan: 'bg-cyan-500 hover:bg-cyan-400 text-white',
-        lime: 'bg-lime-500 hover:bg-lime-400 text-black',
-        emerald: 'bg-emerald-500 hover:bg-emerald-400 text-white',
-        fuchsia: 'bg-fuchsia-500 hover:bg-fuchsia-400 text-white',
-        rose: 'bg-rose-500 hover:bg-rose-400 text-white',
-        violet: 'bg-violet-500 hover:bg-violet-400 text-white',
-        sky: 'bg-sky-500 hover:bg-sky-400 text-white',
+        blue: 'bg-blue-700 sm:hover:bg-blue-600 text-white',
+        red: 'bg-red-600 sm:hover:bg-red-500 text-white',
+        yellow: 'bg-yellow-500 sm:hover:bg-yellow-300 text-black',
+        green: 'bg-green-600 sm:hover:bg-green-500 text-white',
+        indigo: 'bg-indigo-600 sm:hover:bg-indigo-500 text-white',
+        purple: 'bg-purple-600 sm:hover:bg-purple-500 text-white',
+        pink: 'bg-pink-600 sm:hover:bg-pink-500 text-white',
+        teal: 'bg-teal-600 sm:hover:bg-teal-500 text-white',
+        orange: 'bg-orange-600 sm:hover:bg-orange-500 text-white',
+        gray: 'bg-gray-600 sm:hover:bg-gray-500 text-white',
+        black: 'bg-black sm:hover:bg-gray-800 text-white',
+        white: 'bg-white sm:hover:bg-gray-100 text-black',
+        amber: 'bg-amber-600 sm:hover:bg-amber-500 text-black',
+        cyan: 'bg-cyan-600 sm:hover:bg-cyan-500 text-white',
+        lime: 'bg-lime-600 sm:hover:bg-lime-500 text-black',
+        emerald: 'bg-emerald-600 sm:hover:bg-emerald-500 text-white',
+        fuchsia: 'bg-fuchsia-600 sm:hover:bg-fuchsia-500 text-white',
+        rose: 'bg-rose-600 sm:hover:bg-rose-500 text-white',
+        violet: 'bg-violet-600 sm:hover:bg-violet-500 text-white',
+        sky: 'bg-sky-600 sm:hover:bg-sky-500 text-white',
     };
 
     const [display, setDisplay] = useState(false)
@@ -47,17 +47,16 @@ export default function LoveMessage({ content, user, date, title, colors }: Mess
 
     console.log(colors)
     return (
-        <div className={`${display ? `absolute top-0 left-0  p-4 m-auto w-full h-full bg-black bg-opacity-75` : ""} w-full text-left`} onClick={() => switchDisplay()}>
+        <div className={`${display ? `fixed top-0 left-0  sm:p-4  h-full bg-black bg-opacity-75` : ""} w-full text-left mx-auto`} onClick={() => switchDisplay()}>
 
+            <div className={`${colorVariants[colors]} flex  rounded-xl duration-300 cursor-pointer ${display ? "flex-col  sm:w-2/3  sm:py-4 p-6 sm:p-0" : ""} h-full   no-scrollbar overflow-auto  justify-start align-top  sm:mx-auto `} >
 
-            <div className={`${colorVariants[colors]} flex  rounded-xl duration-300 cursor-pointer ${display ? "flex-col w-2/3 text-center" : "w-full"} h-full  overflow-ellipsis justify-center align-middle`} >
+                <Image src={`/LLLogo.webp`} className="p-2 bg-fuchsia-300 rounded-xl mx-auto min-w-[150px]" alt="" width={150} height={150}/>
 
-                <Image src={`/LLLogo.webp`} className="p-2 bg-fuchsia-300 rounded-xl " alt="" width={150} height={150}/>
-
-                <div className="m-4 w-full">
-                    <h2 className={`break-words text-lg font-bold`}>{title}</h2>
-                    <p className={`hidden md:block w-60  break-words  text-base my-2`}>{content.slice(0, 50)}...</p>
-                    <p className={` text-sm italic`}>Sent by {user} on {date.toString()}</p>
+                <div className="sm:m-3  p-2 *:py-2 *:sm:py-0 w-full">
+                    <h2 className={`break-words sm:text-lg font-bold`}>{display ? title : `${title.slice(0, 60)}`}</h2>
+                    <p className={`   break-words  text-base sm:my-2 ${display ? " sm:w-4/5" : "sm:w-60 hidden md:block"}`}>{display ? content : `${content.slice(0, 50)}...`}</p>
+                    <p className={` text-sm italic`}>To be read on {date.toString()}</p>
                 </div>
 
 

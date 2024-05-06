@@ -37,7 +37,7 @@ export default function CreateMessage({user: user}: Props) {
         sendMessage(formData)
     }
 
-    return (<form onSubmit={sendStuff} className=" m-10 sm:py-6 p-2 bg-teal-700 border-8 border-teal-950 rounded-xl sm:w-2/3 mx-auto ">
+    return (<form onSubmit={sendStuff} className=" m-10 sm:py-6 p-2 bg-teal-900 border-8 border-teal-950 rounded-xl sm:w-2/3 mx-auto ">
 
         <h1>Make a message for your bebo!</h1>
         <br/>
@@ -63,7 +63,7 @@ export default function CreateMessage({user: user}: Props) {
         <p className="py-4">The content/words of your message.</p>
 
         <textarea onChange={handleChange} required name="content"
-                  className="p-1  md:w-1/3 w-full border rounded-md resize-none" rows={10}
+                  className="p-1  md:w-2/3 w-full border rounded-md resize-none" rows={12}
                   placeholder="Dear Bebo..">
         </textarea>
 

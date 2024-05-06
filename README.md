@@ -1,42 +1,24 @@
-# Love letter project
-## TODO 
-### Idea planning
-- What content should be on the messages?
-  - Just text?
-  - Images?
-    - Where would the images be stored? I've never have done that lol
+### -- This is still a work in progress --
 
+# Love Letter
+This project is meant to be used as a basic letter creation service. You can send a letter with a specific date and the other user will not see it until the date has elapsed.
 
-### Front-end
-- Create home page
-- Create dynamic page for showing current and previous messages, like a gallery
-- Create page to display current message
-- Implement logic to only fetch messages with the current date of before
-- Create sign-in page (maybe just a click bebo or beeber)
-- Create page to send messages
-- Make site mobile responsive
-
-### Back-end
-- Connect to MongoDB (Vercel serverless functions?)
-- Only pull current or future messages
-- allow creation of future messages
+## Tech Stack - MOAN
+- **MongoDB**
+- **OpenAI** for AI titles and images
+- **AWS S3** to store images
+- **Next.js** 14 with app router
+  - TailwindCSS for styling.
+- Hosted via Vercel.
 
 
 
-# UML
 
-- Login (Asa or Javi)
-  - Homepage
-    - Read current message
-      - Check current date to see if message
-    - See previous messages
-      - See all messages before that
-    - Write message
-      - Set text for it (allow markdown/html?)
-      - Set date for when text is available
-      - Send
+## Purpose
+This is a secret love project for my spouse since I'll be traveling abroad for work for a couple of months and this is like a little surprise.
 
-# Hosting
-- AWS: Has a lot longer setup time
-- Vercel: less time but maybe less efficient?
-Solution: Try Vercel, if not move to AWS.
+Also I've been wanting to brush up my skills with TS and Next, I know it's nothing complex/hard to do but it's still fun.
+
+## Vague commit messages
+I believe this will be purely a solo project so, if the commit messages are sloppy, that's why.
+
