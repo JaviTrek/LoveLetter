@@ -47,14 +47,16 @@ export default function LoveMessage({ content, user, date, title, colors }: Mess
 
     console.log(colors)
     return (
-        <div className={`${display ? `absolute top-0 left-0  p-4 m-auto w-full h-full bg-black bg-opacity-75` : ""} text-left`} onClick={() => switchDisplay()}>
+        <div className={`${display ? `absolute top-0 left-0  p-4 m-auto w-full h-full bg-black bg-opacity-75` : ""} w-full text-left`} onClick={() => switchDisplay()}>
 
 
-            <div className={`${colorVariants[colors]} flex h-full p-5 rounded-lg max-w-md mx-auto duration-300 cursor-pointer`} >
-                <Image src={`/LLLogo.webp`} className="p-2 bg-fuchsia-300" alt="" width={150} height={150}/>
-                <div className="p-4 truncate">
-                    <h2 className={` text-lg font-bold`}>{title}</h2>
-                    <p className={` text-base my-2`}>{content}</p>
+            <div className={`${colorVariants[colors]} flex  rounded-xl duration-300 cursor-pointer ${display ? "flex-col w-2/3 text-center" : "w-full"} h-full  overflow-ellipsis justify-center align-middle`} >
+
+                <Image src={`/LLLogo.webp`} className="p-2 bg-fuchsia-300 rounded-xl " alt="" width={150} height={150}/>
+
+                <div className="m-4 w-full">
+                    <h2 className={`break-words text-lg font-bold`}>{title}</h2>
+                    <p className={`hidden md:block w-60  break-words  text-base my-2`}>{content.slice(0, 50)}...</p>
                     <p className={` text-sm italic`}>Sent by {user} on {date.toString()}</p>
                 </div>
 
