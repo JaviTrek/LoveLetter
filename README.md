@@ -22,3 +22,12 @@ Also I've been wanting to brush up my skills with TS and Next, I know it's nothi
 ## Vague commit messages
 I believe this will be purely a solo project so, if the commit messages are sloppy, that's why.
 
+
+
+# AWS S3
+1. Configure SDK
+   - Load Credentials
+     - SDK Authenthication (IAM?)
+       - Select permisions
+2. 
+

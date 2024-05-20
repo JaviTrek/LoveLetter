@@ -45,7 +45,7 @@ export default function LoveMessage({ content, user, date, title, colors }: Mess
         setDisplay(!display)
     }
 
-    console.log(colors)
+    //console.log(colors)
     return (
         <div className={`${display ? `fixed top-0 left-0  sm:p-4  h-full bg-black bg-opacity-75` : ""} w-full text-left mx-auto`} onClick={() => switchDisplay()}>
 

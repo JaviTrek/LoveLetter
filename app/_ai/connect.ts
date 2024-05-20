@@ -19,7 +19,7 @@ export async function getAITitleColor(content: string, theme: string) {
     });
 
     const response = JSON.parse(getTitle.choices[0].message.content)
-    console.log(response)
+    //console.log(response)
     return {title: response.title, color: response.color};
 }
 
