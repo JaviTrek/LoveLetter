@@ -30,6 +30,7 @@ export async function GET(request: Request): Promise<Response> {
             //we get image as buffer
             const imageBuffer = await streamToBuffer(data.Body);
             //we make that buffer into a base64 string?
+            // @ts-ignore
             const base64Image = Buffer.from(imageBuffer).toString('base64');
             //we return our image in a way the frontend src can understand
             return Response.json({ image: `data:image/jpeg;base64,${base64Image}` })
