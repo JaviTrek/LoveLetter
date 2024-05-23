@@ -2,14 +2,15 @@ import Menu from "../components/Menu";
 import {getUser} from "../lib";
 import {getMyMessages, message} from "../_database/messages";
 import {redirect} from "next/navigation";
-import {getPhoto, helloS3} from "../_aws/connect";
+import {getImage} from "../_aws/connect";
 
 
 export default async function Page() {
 
 
 
- await getPhoto();
+
+
 
     const user: "spooder" | "baguette" = await getUser();
 
@@ -31,6 +32,7 @@ export default async function Page() {
 
     return (
         <>
+
 
             <Menu user={user} messages={messages}/>
 

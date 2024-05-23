@@ -2,38 +2,18 @@
 import {GetObjectCommand, ListBucketsCommand, S3Client} from "@aws-sdk/client-s3";
 // This relies on a Region being set up in your local AWS config.
 const client = new S3Client({
-    region: process.env.AWS_REGION,
+    region: process.env.AWS_REGION || "us-east-2",
 });
 
 
 export { client };
 
-export const helloS3 = async () => {
-    const command = new ListBucketsCommand({});
 
-    const { Buckets } = await client.send(command);
-    console.log("Buckets: ");
-    console.log(Buckets.map((bucket) => bucket.Name).join("\n"));
-    return Buckets;
-};
+export async function getImage(bucketName: string, fileKey: string) {
 
-export const getPhoto = async () => {
-    const command = new GetObjectCommand({
-        Bucket: "dev.javi.bucket",
-        Key: "avatar.jpg",
-    });
+    console.log("server flag")
+    console.log(process.env.IS_SERVER_FLAG)
 
-    try {
-        const response = await client.send(command);
-        // The Body object also has 'transformToByteArray' and 'transformToWebStream' methods.
-        const str = await response.Body.transformToString();
-        console.log(str);
-    } catch (err) {
-        console.error(err);
-    }
-};
-
-async function getImage(bucketName: string, fileKey: string) {
     try {
         const data = await client.send(new GetObjectCommand({
             Bucket: bucketName,
@@ -42,7 +22,12 @@ async function getImage(bucketName: string, fileKey: string) {
 
         // If the response body is readable, we can convert it to a buffer
         if (data.Body) {
-            return await streamToBuffer(data.Body);
+            //we get image as buffer
+            const imageBuffer = await streamToBuffer(data.Body);
+            //we make that buffer into a base64 string?
+            const base64Image = Buffer.from(imageBuffer).toString('base64');
+            //we return our image in a way the frontend src can understand
+            return { image: `data:image/jpeg;base64,${base64Image}` }
         }
         return null;
     } catch (err) {

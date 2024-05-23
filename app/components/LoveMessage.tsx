@@ -1,5 +1,6 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Image from "next/image";
+import {getImage} from "../_aws/connect";
 
 interface MessageProps {
     theme: string;
@@ -39,6 +40,18 @@ export default function LoveMessage({ content, user, date, title, colors }: Mess
     };
 
     const [display, setDisplay] = useState(false)
+    const [myImage, setMyImage] = useState(`/LLLogo.webp`);
+
+useEffect(()=> {
+    const fetchData = async()=> {
+        const s3Image = await fetch("/api/aws?key=avatar.jpg");
+        console.log("called!")
+        const myImage = await s3Image.json()
+        setMyImage(myImage.image )
+    }
+    fetchData();
+})
+
 
     function switchDisplay() {
         console.log("clicked!")
@@ -51,7 +64,7 @@ export default function LoveMessage({ content, user, date, title, colors }: Mess
 
             <div className={`${colorVariants[colors]} flex  rounded-xl duration-300 cursor-pointer ${display ? "flex-col  sm:w-2/3  sm:py-4 p-6 sm:p-0" : ""} h-full   no-scrollbar overflow-auto  justify-start align-top  sm:mx-auto `} >
 
-                <Image src={`/LLLogo.webp`} className="p-2 bg-fuchsia-300 rounded-xl mx-auto min-w-[150px]" alt="" width={150} height={150}/>
+                <Image src={myImage} className="p-2 bg-fuchsia-300 rounded-xl mx-auto min-w-[150px]" alt="" width={150} height={150}/>
 
                 <div className="sm:m-3  p-2 *:py-2 *:sm:py-0 w-full">
                     <h2 className={`break-words sm:text-lg font-bold`}>{display ? title : `${title.slice(0, 60)}`}</h2>
