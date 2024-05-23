@@ -2,7 +2,7 @@ import Menu from "../components/Menu";
 import {getUser} from "../lib";
 import {getMyMessages, message} from "../_database/messages";
 import {redirect} from "next/navigation";
-import {getImage} from "../_aws/connect";
+
 
 
 export default async function Page() {

@@ -4,12 +4,6 @@ const client = new S3Client({
     region: process.env.AWS_REGION,
 });
 
-
-export { client };
-
-
-
-
 // Helper function to convert readable stream to buffer
 function streamToBuffer(stream) {
     return new Promise((resolve, reject) => {

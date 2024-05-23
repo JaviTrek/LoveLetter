@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import Image from "next/image";
-import {getImage} from "../_aws/connect";
 
 interface MessageProps {
     theme: string;

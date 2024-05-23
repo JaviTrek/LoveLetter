@@ -2,7 +2,7 @@
 
 import {useState} from "react";
 import CreateMessage from "./CreateMessage";
-import {getBeboMessages, message, user} from "../_database/messages";
+import {message, user} from "../_database/messages";
 import LoveMessage from "./LoveMessage";
 import {useRouter} from "next/navigation";
 import {setUser} from "../lib";
