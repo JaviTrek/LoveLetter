@@ -24,10 +24,9 @@ I believe this will be purely a solo project so, if the commit messages are slop
 
 
 
-# AWS S3
-1. Configure SDK
-   - Load Credentials
-     - SDK Authenthication (IAM?)
-       - Select permisions
-2. 
+# TODO
+- Update messages depending on date
+- display new/old messages
+- show capability of "show more" (maybe takes to another page?)
+- 
 

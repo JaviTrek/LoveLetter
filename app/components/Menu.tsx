@@ -58,7 +58,7 @@ export default function Menu({user, messages}: Props) {
 <div>
                 <h1 className="text-left p-4 sm:p-10">My messages</h1>
 
-                <div className="flex flex-col sm:flex-row  gap-8 sm:m-10 justify-center align-middle rounded-xl p-4 overflow-x-auto no-scrollbar " >
+                <div className="flex flex-col sm:flex-row  gap-8 sm:m-10  align-middle rounded-xl p-4 overflow-x-auto no-scrollbar " >
 
 
                     {messages.map((message, index) => (
