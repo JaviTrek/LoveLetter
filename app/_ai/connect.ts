@@ -30,7 +30,7 @@ export async function getAITitleColor(content: string, theme: string) {
     //TODO:  create AI image, send it to AWS
     const imageReq = await openai.images.generate({
         model: "dall-e-3",
-        prompt: `Create a series of unhinged, super creative images in non-traditional art styles such as art brut, deconstructivism, vaporwave, queer art or tumblr art based on the content provided by the user below. Each image should push the boundaries of conventional art, blending elements from different genres and eras in unexpected ways. Use bizarre juxtapositions to transform the provided content into art.
+        prompt: `Create an unhinged images in non-traditional art styles such as art brut, deconstructivism, vaporwave, queer art or tumblr art based on the content provided by the user below. Make the image be uncanny and funny. For example, a giant air purifier in a forest.
          
          content ${content}`,
         n: 1,

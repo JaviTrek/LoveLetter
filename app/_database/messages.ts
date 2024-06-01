@@ -23,11 +23,22 @@ export async function sendMessage(message:message) {
     const db = client.db("messages");
     const col = db.collection(message.user);
 
-    const ai = await getAITitleColor(message.content, message.theme)
-    message.colors = ai.color
-    message.title = ai.title;
+    try {
+        const ai = await getAITitleColor(message.content, message.theme);
+        message.colors = ai.color;
+        message.title = ai.title;
 
-    await col.insertOne({...message});
+        const result = await col.insertOne({ ...message });
+
+        if (result.acknowledged) {
+            return { status: 'success' };
+        } else {
+            return { status: 'failed to insert message into MongoDB' };
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return { status: 'overall error' };
+    }
 
 }
 

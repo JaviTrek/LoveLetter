@@ -20,10 +20,9 @@ export default function Menu({user, messages}: Props) {
 
     const [messageDisplay, setMessageDisplay] = useState("read")
 
-    return(
-        <div>
+    return (<div>
 
-            <div className="flex justify-center align-middle bg-green-800 *:py-4  *:duration-300">
+            <div className="flex justify-center align-middle *:py-4  *:duration-300">
 
 
                 <button
@@ -48,34 +47,33 @@ export default function Menu({user, messages}: Props) {
                         await setUser(null)
                         router.push("/")
                     }}>
-                   LOG OUT
+                    LOG OUT
                 </button>
 
 
             </div>
+
             {messageDisplay === "read" ?
 
-<div>
-                <h1 className="text-left p-4 sm:p-10">My messages</h1>
+                <div>
+                    <h1 className="text-left p-4 sm:p-10">My messages</h1>
 
-                <div className="flex flex-col sm:flex-row  gap-8 sm:m-10  align-middle rounded-xl p-4 overflow-x-auto no-scrollbar " >
+                    <div
+                        className="flex flex-col sm:flex-row  gap-8 sm:m-10  align-middle rounded-xl p-4 overflow-x-auto no-scrollbar ">
 
 
-                    {messages.map((message, index) => (
+                        {messages.map((message, index) => (
 
-                        <LoveMessage user={user} content={message.content} date={message.date} title={message.title}
-                                     key={index} colors={message.colors} theme="banana"/>
-                    ))}
+                            <LoveMessage user={user} content={message.content} date={message.date} title={message.title}
+                                         key={index} colors={message.colors} theme="banana"/>))}
+                    </div>
                 </div>
-</div>
 
                 :
 
                 //we are writing
-                <CreateMessage user={user}/>
-            }
+                <CreateMessage user={user}/>}
 
 
-        </div>
-    )
+        </div>)
 }

@@ -1,20 +1,13 @@
 import Menu from "../components/Menu";
 import {getUser} from "../lib";
-import {getMyMessages, message} from "../_database/messages";
+import {getMyMessages, message, user} from "../_database/messages";
 import {redirect} from "next/navigation";
-
-
 
 export default async function Page() {
 
+    const user: user = await getUser();
 
-
-
-
-
-    const user: "spooder" | "baguette" = await getUser();
-
-    if (user !== "spooder" && user !== "baguette") {
+    if (user !== user) {
         redirect("/")
     }
 
@@ -24,19 +17,10 @@ export default async function Page() {
         msg._id = null;
     })
 
-    //console.log("LOGGING MESSAGES")
-    //console.log(messages)
-
-
-    //console.log(await getMyMessages(user) as  message[])
 
     return (
         <>
-
-
             <Menu user={user} messages={messages}/>
-
-
         </>
     )
 
