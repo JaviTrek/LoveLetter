@@ -20,7 +20,7 @@ export default function Menu({user, messages}: Props) {
 
     const [messageDisplay, setMessageDisplay] = useState("read")
 
-    return (<div>
+    return (<div className="min-h-screen">
 
             <div className="flex justify-center align-middle *:py-4  *:duration-300">
 
@@ -53,8 +53,10 @@ export default function Menu({user, messages}: Props) {
 
             </div>
 
-            {messageDisplay === "read" ?
 
+
+            {messageDisplay === "read" ?
+                //TODO: Tabify these messages/do pagination/something like that
                 <div>
                     <h1 className="text-left p-4 sm:p-10">My messages</h1>
 

@@ -37,23 +37,25 @@ export default function CreateMessage({user: user}: Props) {
 
 
           e.preventDefault()
+
+          //lets start loading/waiting
           toast('⌛ Please wait! Your letter is being sent.', {
               position: "top-right",
-              autoClose: 10000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
+              autoClose: 99999,
+              hideProgressBar: true,
+              closeOnClick: false,
+              pauseOnHover: false,
+              draggable: false,
               progress: undefined,
               theme: "dark",
           });
             setLoading(true)
-          //todo: add wait screen here to activate
-          console.log(e)
 
+          //send our data and wait
           let result: {status: string} = await sendMessage(formData)
 
-          //todo: takeout wait screen but add yes/no message
+          toast.dismiss();
+          //we got results lets see
           if (result.status === "success") toast('✅ Letter sent correctly!', {
                   position: "top-right",
                   autoClose: 7000,
@@ -89,21 +91,21 @@ export default function CreateMessage({user: user}: Props) {
             </div>
 
             <form onSubmit={sendStuff}
-                  className="  m-5 sm:py-6 p-2 bg-teal-900 border-8 border-teal-950 rounded-xl sm:w-2/3 mx-auto ">
+                  className="  m-5 sm:py-6 p-2 bg-teal-900 rounded-xl sm:w-2/3 mx-auto ">
 
 
                 <h2>Make a message for your bebo!</h2>
                 <br/>
-                <div className="flex sm:flex-row flex-col justify-center align-middle sm:gap-14 gap-8">
+                <div className="flex sm:flex-row flex-col sm:justify-center sm:text-center text-left sm:gap-12 gap-6">
                     <div>
-                        <p className="py-4 sm:py-2">The theme of the message</p>
+                        <p className="py-2 sm:py-2">The theme of the message</p>
 
                         <input onChange={handleChange} required type="text" name="theme"
-                               className="p-1 border rounded-md" placeholder="Love, support, pipicaca"/>
+                               className="p-1 border rounded-md" placeholder="Rats, space, isopods..."/>
                     </div>
 
                     <div>
-                        <p className="py-4 sm:py-2">The date you want your bebo to read this <br/> (your bebo won't see
+                        <p className="py-2 sm:py-2">The date you want your bebo to read this <br/> (your bebo won't see
                             this
                             message until the date you've chosen)</p>
                         <input onChange={handleChange} required className="p-1 border rounded-md" type="date"
@@ -114,11 +116,11 @@ export default function CreateMessage({user: user}: Props) {
                 </div>
 
 
-                <p className="py-4 sm:py-2">The content/words of your message.</p>
+                <p className=" mt-3 py-6 sm:py-2 text-left sm:text-center">The content/words of your message.</p>
 
                 <textarea onChange={handleChange} required name="content"
                           className="p-1  md:w-2/4 w-full border rounded-md resize-none" rows={8}
-                          placeholder="Dear Bebo..">
+                          placeholder="Dear Bebo.. you are the best!">
         </textarea>
 
 

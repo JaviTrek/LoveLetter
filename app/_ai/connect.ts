@@ -8,15 +8,15 @@ const openai = new OpenAI({
 export async function getAITitleColor(content: string, theme: string) {
     const getTitle = await openai.chat.completions.create({
         messages: [{ role: "system", content:
-                `You are great writer and artist. Respond only on JSON to this message. You are to make a short title for a love letter based on the content you'll be receiving below. The title will be impacted on the next theme as well: ${theme}  It's up to you to draft the title based on the content and the title, feel free to be creative, funny, cryptic, abstract, romantic, etc.
+                `You are great writer and artist. Respond only on JSON to this message. You are to make a short title for a love letter based on the content you'll be receiving below. The title will be impacted on the theme as well: ${theme}  Make the title be unhinged, funny but keeping it within the theme and content the user provided.
                 
-                    Also, choose one of the following colors that you think will match the title and theme the best: blue, red, yellow, green, indigo, purple, pink, teal, orange, gray, black, white, amber, cyan, lime, emerald, fuchsia, rose, violet or sky.
+                    Also, choose one of the following colors at random and use it as the value of your color property: blue, red, yellow, green, indigo, purple, pink, teal, orange, gray, black, white, amber, cyan, lime, emerald, fuchsia, rose, violet or sky.
                   
                   Your JSON titleRes will only include the title and color properties.
                   
                   Here is the content of the love letter: ${content}`
         }],
-        model: "gpt-4-turbo",
+        model: "gpt-4o",
         // @ts-ignore
         response_format: {
             type: "json_object"
@@ -30,9 +30,11 @@ export async function getAITitleColor(content: string, theme: string) {
     //TODO:  create AI image, send it to AWS
     const imageReq = await openai.images.generate({
         model: "dall-e-3",
-        prompt: `Create an unhinged images in non-traditional art styles such as art brut, deconstructivism, vaporwave, queer art or tumblr art based on the content provided by the user below. Make the image be uncanny and funny. For example, a giant air purifier in a forest.
+        prompt: `Create an unhinged image based on the content and theme below. Pick the most important points from the content below and use them to create the image. Make the image be uncanny and funny. For example, a giant air purifier in a forest.
+        
+        The theme for our image is: ${theme}
          
-         content ${content}`,
+         content for extra inspiration: ${content}`,
         n: 1,
         size: "1024x1024",
         response_format: "b64_json"

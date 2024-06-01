@@ -57,18 +57,18 @@ useEffect(()=> {
         setDisplay(!display)
     }
 
-    //console.log(colors)
     return (
-        <div className={`${display ? `fixed top-0 left-0  sm:p-4  h-full bg-black bg-opacity-75` : ""} w-full text-left mx-auto`} onClick={() => switchDisplay()}>
+        <div className={`${display ? `fixed top-0 left-0  sm:p-4  h-full bg-black bg-opacity-80` : ""} w-full text-left mx-auto`} onClick={() => switchDisplay()}>
 
             <div className={`${colorVariants[colors]} flex  rounded-xl duration-300 cursor-pointer ${display ? "flex-col  sm:w-2/3  sm:py-4 p-6 sm:p-0" : ""} h-full   no-scrollbar overflow-auto  justify-start align-top  sm:mx-auto `} >
 
-                <Image src={myImage} className=" bg-fuchsia-300 rounded-xl mx-auto min-w-[150px]" alt="" width={150} height={150}/>
+                <Image src={myImage} className={ `${ display ? "min-w-[300px]" : " "} bg-fuchsia-300 rounded-xl mx-auto ` } alt="" width={150} height={150}/>
 
+                {/*Add title and stuff below image!!!*/}
                 <div className="sm:m-3  p-2 *:py-2 *:sm:py-0 w-full">
                     <h2 className={`break-words sm:text-lg font-bold`}>{display ? title : `${title.slice(0, 60)}`}</h2>
                     <p className={`   break-words  text-base sm:my-2 ${display ? " sm:w-4/5" : "sm:w-60 hidden md:block"}`}>{display ? content : `${content.slice(0, 50)}...`}</p>
-                    <p className={` text-sm italic`}>To be read on {date.toString()}</p>
+                    <p className={` text-sm italic`}>Available after {date.toString()}</p>
                 </div>
 
 
