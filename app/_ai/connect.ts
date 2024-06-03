@@ -44,7 +44,7 @@ export async function getAITitleColor(content: string, theme: string) {
 
 
 
-    const imageBuffer = Buffer.from(imageReq.data[0].b64_json, 'base64');
+    //const imageBuffer = Buffer.from(imageReq.data[0].b64_json, 'base64');
 
     //await sendImageAWS(imageBuffer, titleRes.title.replace(/\s/g, ''))
 
