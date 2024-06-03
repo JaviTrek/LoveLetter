@@ -52,7 +52,7 @@ export default function CreateMessage({user: user}: Props) {
             setLoading(true)
 
           //send our data and wait
-          let result: {status: string} = await sendMessage(formData)
+          let result: {status: string} =  await sendMessage(formData)
 
           toast.dismiss();
           //we got results lets see
