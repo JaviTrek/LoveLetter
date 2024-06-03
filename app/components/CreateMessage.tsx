@@ -41,7 +41,7 @@ export default function CreateMessage({user: user}: Props) {
           //lets start loading/waiting
           toast('⌛ Please wait! Your letter is being sent.', {
               position: "top-right",
-              autoClose: 99999,
+              autoClose: false,
               hideProgressBar: true,
               closeOnClick: false,
               pauseOnHover: false,

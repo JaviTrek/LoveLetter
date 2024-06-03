@@ -58,6 +58,8 @@ export default function Menu({user, messages}: Props) {
             {messageDisplay === "read" ?
                 //TODO: Tabify these messages/do pagination/something like that
                 <div>
+
+                   {/* //TODO: Put this in a container*/}
                     <h1 className="text-left p-4 sm:p-10">My messages</h1>
 
                     <div
