@@ -7,6 +7,8 @@ interface Props {
     user: user
 }
 
+export const maxDuration = 30;
+
 export default function CreateMessage({user: user}: Props) {
 
     const today = new Date().toISOString().split('T')[0];
