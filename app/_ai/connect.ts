@@ -26,6 +26,7 @@ export async function getAITitleColor(content: string, theme: string) {
     const titleRes = JSON.parse(getTitle.choices[0].message.content)
 
 
+    console.log("beforeImageRequest")
 
     //TODO:  create AI image, send it to AWS
     const imageReq = await openai.images.generate({
@@ -37,11 +38,13 @@ export async function getAITitleColor(content: string, theme: string) {
          content for extra inspiration: ${content}`,
         n: 1,
         size: "1024x1024",
-        response_format: "b64_json"
+       // response_format: "b64_json"
 
 
     });
 
+    console.log(imageReq)
+    console.log("After imagerequest")
 
 
     //const imageBuffer = Buffer.from(imageReq.data[0].b64_json, 'base64');
@@ -51,7 +54,7 @@ export async function getAITitleColor(content: string, theme: string) {
 
 
     //console.log(titleRes)
-    return {title: titleRes.title, color: titleRes.color};
+    return {title: titleRes.title, color: titleRes.color, };
 }
 
 

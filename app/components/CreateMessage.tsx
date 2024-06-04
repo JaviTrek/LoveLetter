@@ -55,6 +55,9 @@ export default function CreateMessage({user: user}: Props) {
           let result: {status: string} =  await sendMessage(formData)
 
           toast.dismiss();
+
+          console.log(result)
+
           //we got results lets see
           if (result.status === "success") toast('✅ Letter sent correctly!', {
                   position: "top-right",
