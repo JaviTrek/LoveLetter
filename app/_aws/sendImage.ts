@@ -1,6 +1,6 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import sharp from "sharp";
-
+export const maxDuration = 30;
 const client = new S3Client({  region: process.env.AWS_REGION});
 
 export async function sendImageAWS (base64: Buffer, title: string) {

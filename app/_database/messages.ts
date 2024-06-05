@@ -2,7 +2,7 @@
 import connectToMongoDB from "./connect";
 import {MongoClient, ObjectId} from "mongodb";
 import { getAITitleColor} from "../_ai/connect";
-
+export const maxDuration = 30;
 export type user = "spooder" | "baguette"
 
 export interface message {

@@ -1,5 +1,5 @@
 import {MongoClient, ServerApiVersion} from "mongodb";
-
+export const maxDuration = 30;
 const uri = process.env.MONGO;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version

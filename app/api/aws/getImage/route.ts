@@ -3,7 +3,7 @@ import {GetObjectCommand, S3Client} from "@aws-sdk/client-s3";
 const client = new S3Client({
     region: process.env.AWS_REGION,
 });
-
+export const maxDuration = 30;
 // Helper function to convert readable stream to buffer
 function streamToBuffer(stream) {
     return new Promise((resolve, reject) => {

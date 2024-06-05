@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import {sendImageAWS} from "../_aws/sendImage";
-
+export const maxDuration = 30;
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
