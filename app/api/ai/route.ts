@@ -63,6 +63,7 @@ export async function GET(request: Request): Promise<Response> {
 
     await sendImageAWS(imageBuffer, titleRes.title.replace(/\s/g, ''))
 
+    //@ts-ignore
     return Response.json({title: titleRes.title, color: titleRes.color,});
 
 

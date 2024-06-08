@@ -35,6 +35,7 @@ export async function GET(request: Request): Promise<Response> {
             // @ts-ignore
             const base64Image = Buffer.from(imageBuffer).toString('base64');
             //we return our image in a way the frontend src can understand
+
             // @ts-ignore
             return Response.json({ image: `data:image/jpeg;base64,${base64Image}` })
         }
