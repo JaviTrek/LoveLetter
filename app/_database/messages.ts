@@ -2,7 +2,7 @@
 import connectToMongoDB from "./connect";
 import {MongoClient, ObjectId} from "mongodb";
 import { getAITitleColor} from "../_ai/connect";
-export const maxDuration = 30;
+
 export type user = "spooder" | "baguette"
 
 export interface message {
@@ -17,16 +17,20 @@ export interface message {
     date: Date
 }
 
-export async function sendMessage(message:message) {
+export interface aiMessage {
+    color: string,
+    title: string
+}
+
+export async function sendMessage(message:message, aiMessage: aiMessage) {
 
     const client: MongoClient = await connectToMongoDB();
     const db = client.db("messages");
     const col = db.collection(message.user);
 
     try {
-        const ai = await getAITitleColor(message.content, message.theme);
-        message.colors = ai.color;
-        message.title = ai.title;
+        message.colors = aiMessage.color;
+        message.title = aiMessage.title;
 
         const result = await col.insertOne({ ...message });
 

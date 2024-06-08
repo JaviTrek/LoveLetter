@@ -53,8 +53,13 @@ export default function CreateMessage({user: user}: Props) {
           });
             setLoading(true)
 
+          // Have to get AI content via get request because Vercel is being a bitch and timing out after 10 seconds...
+          const aiContent = await fetch(`/api/ai?content=${formData.content}&theme=${formData.theme}`);
+          const aiMessage = await aiContent.json()
+
+
           //send our data and wait
-          let result: {status: string} =  await sendMessage(formData)
+          let result: {status: string} =  await sendMessage(formData, aiMessage)
 
           toast.dismiss();
 
@@ -106,7 +111,7 @@ export default function CreateMessage({user: user}: Props) {
                         <p className="py-2 sm:py-2">The theme of the message</p>
 
                         <input onChange={handleChange} required type="text" name="theme"
-                               className="p-1 border rounded-md" placeholder="Rats, space, isopods..."/>
+                               className="p-1 border rounded-md" placeholder="Rats, space, isopods..." value="Love"/>
                     </div>
 
                     <div>
@@ -115,7 +120,7 @@ export default function CreateMessage({user: user}: Props) {
                             message until the date you've chosen)</p>
                         <input onChange={handleChange} required className="p-1 border rounded-md" type="date"
                                name="date" min={today}
-                               max="2035-12-31"/>
+                               max="2035-12-31" value="2024-12-31"/>
                     </div>
 
                 </div>
@@ -125,7 +130,7 @@ export default function CreateMessage({user: user}: Props) {
 
                 <textarea onChange={handleChange} required name="content"
                           className="p-1  md:w-2/4 w-full border rounded-md resize-none" rows={8}
-                          placeholder="Dear Bebo.. you are the best!">
+                          placeholder="Dear Bebo.. you are the best!" value="I love you so much my sweet pumpkinm!">
         </textarea>
 
 
