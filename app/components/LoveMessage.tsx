@@ -1,16 +1,21 @@
 import {useEffect, useState} from "react";
 import Image from "next/image";
+import {ObjectId} from "mongodb";
+import {updateMessageStatus, user} from "../_database/messages";
 
 interface MessageProps {
     theme: string;
     content: string;
-    user: string;
+    user: user;
     date: Date;
     title: string;
     colors: string;
+    _id: ObjectId | string
+    status: "old" | "new"
+
 }
 
-export default function LoveMessage({ content, user, date, title, colors }: MessageProps) {
+export default function LoveMessage({ content, user, date, title, colors, _id, status}: MessageProps) {
 
 
 
@@ -55,6 +60,12 @@ useEffect(()=> {
     function switchDisplay() {
         console.log("clicked!")
         setDisplay(!display)
+
+        if (status === "new") {
+            updateMessageStatus(_id, user, "old")
+        }
+
+
     }
 
     return (
@@ -62,7 +73,7 @@ useEffect(()=> {
 
             <div className={`${colorVariants[colors]} flex  rounded-xl duration-300 cursor-pointer ${display ? "flex-col  sm:w-2/3  sm:py-4 p-6 sm:p-0" : ""} h-full   no-scrollbar overflow-auto  justify-start align-top  sm:mx-auto `} >
 
-                <Image src={myImage} className={ `${ display ? "min-w-[300px]" : "min-w-[150px] "} bg-fuchsia-300 rounded-xl mx-auto ` } alt="" width={150} height={150}/>
+                <Image src={myImage} className={ `${ display ? "min-w-[300px]" : "min-w-[200px] "} bg-fuchsia-300 rounded-xl mx-auto ` } alt="" width={150} height={150}/>
 
                 <div className="sm:m-3  p-2 *:py-2 *:sm:py-0 w-full">
                     <h2 className={`break-words sm:text-lg font-bold`}>{display ? title : `${title.slice(0, 60)}`}</h2>

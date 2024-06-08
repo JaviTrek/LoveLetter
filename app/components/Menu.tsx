@@ -18,6 +18,14 @@ interface Props {
 export default function Menu({user, messages}: Props) {
     const router = useRouter()
 
+    let newMessages: message[] = []
+    let oldMessages: message[] = []
+
+    messages.forEach(message => {
+        if (message.status === "old") oldMessages.push(message)
+        else newMessages.push(message)
+    })
+
     const [messageDisplay, setMessageDisplay] = useState("read")
 
     return (<div className="min-h-screen">
@@ -59,17 +67,27 @@ export default function Menu({user, messages}: Props) {
                 //TODO: Tabify these messages/do pagination/something like that
                 <div>
 
-                   {/* //TODO: Put this in a container*/}
-                    <h1 className="text-left p-4 sm:p-10">My messages</h1>
+                    {/* //TODO: Put this in a container*/}
+                    <h1 className="text-left p-4 sm:p-5">New messages</h1>
 
                     <div
-                        className="flex flex-col sm:flex-row  gap-8 sm:m-10  align-middle rounded-xl p-4 overflow-x-auto no-scrollbar ">
-
-
-                        {messages.map((message, index) => (
+                        className="flex flex-col sm:flex-row  gap-8 sm:m-4 align-middle rounded-xl p-4 overflow-x-auto no-scrollbar ">
+                        {newMessages.map((message, index) => (
 
                             <LoveMessage user={user} content={message.content} date={message.date} title={message.title}
-                                         key={index} colors={message.colors} theme="banana"/>))}
+                                         status={message.status}
+                                         key={index} colors={message.colors} theme="banana" _id={message._id}/>))}
+                    </div>
+
+                    <h1 className="text-left p-4 sm:p-5">Old messages</h1>
+
+                    <div
+                        className="flex flex-col sm:flex-row  gap-8 sm:m-4 align-middle rounded-xl p-4 overflow-x-auto no-scrollbar ">
+                        {oldMessages.map((message, index) => (
+
+                            <LoveMessage user={user} content={message.content} date={message.date} title={message.title}
+                                         status={message.status}
+                                         key={index} colors={message.colors} theme="banana" _id={message._id}/>))}
                     </div>
                 </div>
 
@@ -79,5 +97,5 @@ export default function Menu({user, messages}: Props) {
                 <CreateMessage user={user}/>}
 
 
-        </div>)
+    </div>)
 }

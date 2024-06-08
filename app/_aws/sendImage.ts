@@ -7,8 +7,6 @@ export async function sendImageAWS (base64: Buffer, title: string) {
 
     const compressedBuffer = await sharp(base64).resize(800, 800).jpeg({quality: 75}).toBuffer();
 
-    //console.log(compressedBuffer);
-
     const command = new PutObjectCommand({
         Bucket: "dev.javi.bucket",
         ContentType: "image/jpeg",
@@ -18,7 +16,7 @@ export async function sendImageAWS (base64: Buffer, title: string) {
 
     try {
         await client.send(command);
-        console.log("image sent correctly!");
+        console.log("S3 image sent correctly!");
     } catch (err) {
         console.error(err);
     }

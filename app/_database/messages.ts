@@ -6,7 +6,7 @@ import { getAITitleColor} from "../_ai/connect";
 export type user = "spooder" | "baguette"
 
 export interface message {
-    _id?: ObjectId,
+    _id?: ObjectId | string,
     user: user,
     theme: string,
     colors?: string //ai
@@ -15,6 +15,7 @@ export interface message {
     title?: string, //ai
     content: string,
     date: Date
+    status: "new" | "old",
 }
 
 export interface aiMessage {
@@ -32,6 +33,10 @@ export async function sendMessage(message:message, aiMessage: aiMessage) {
         message.colors = aiMessage.color;
         message.title = aiMessage.title;
 
+        //fixes the @ts-ignore below
+        if (typeof message._id === "string") {message._id = new ObjectId(message._id);}
+
+        //@ts-ignore
         const result = await col.insertOne({ ...message });
 
         if (result.acknowledged) {
@@ -66,7 +71,27 @@ export async function getBeboMessages(user: user) {
     const bebo = user === "spooder" ?  "baguette" : "spooder";
     const col = await getUserCollection(bebo);
 
-    const query = { date: { $lt: new Date } };
+    // Get the current date in "YYYY-MM-DD" format
+    const today = new Date().toISOString().split('T')[0];
+
+    const query = {
+        date: { $lt: today }
+    };
+
     return await col.find(query).toArray()
+
+}
+
+export async function updateMessageStatus(_id: string |ObjectId, user:user, status: "old" | "new") {
+
+    user = user === "spooder" ?  "baguette" : "spooder";
+    console.log(_id, user, status)
+
+    _id = new ObjectId(_id);
+
+    const col = await getUserCollection(user);
+
+    await col.updateOne({_id: _id}, {$set: { status } });
+
 
 }

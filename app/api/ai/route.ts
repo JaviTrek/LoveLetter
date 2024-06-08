@@ -18,7 +18,7 @@ export async function GET(request: Request): Promise<Response> {
 
     const getTitle = await openai.chat.completions.create({
         messages: [{ role: "system", content:
-                `You are great writer and artist. Respond only on JSON to this message. You are to make a short title for a love letter based on the content you'll be receiving below. The title will be impacted on the theme as well: ${theme}  Make the title be unhinged, funny but keeping it within the theme and content the user provided. Do not use any 
+                `You are great writer and artist. Respond only on JSON to this message. You are to make a short title for a love letter based on the content you'll be receiving below. The title will be impacted on the theme as well: ${theme}  Make the title be unhinged, funny but keeping it within the theme and content the user provided. Do not use any special characters on the title such as ampersand.
                 
                     Also, choose one of the following colors at random and use it as the value of your color property: blue, red, yellow, green, indigo, purple, pink, teal, orange, gray, black, white, amber, cyan, lime, emerald, fuchsia, rose, violet or sky.
                   
@@ -42,7 +42,9 @@ export async function GET(request: Request): Promise<Response> {
     //TODO:  create AI image, send it to AWS
     const imageReq = await openai.images.generate({
         model: "dall-e-3",
-        prompt: `Create an unhinged image based on the content and theme below. Pick the most important points from the content below and use them to create the image. Make the image be uncanny and funny. For example, a giant air purifier in a forest.
+        prompt: `Create an unhinged image based on the content and theme below. Pick the most important points from the content below and use them to create the image. Make the image be uncanny and funny. For example, a giant air purifier in a forest, A giant hamster wheel powered by miniature dinosaurs in an ancient city or A giant robot butler serving tea to aliens in a Victorian-era parlor.
+        
+        Remember these are examples, you want to base your image in the theme and content below.
         
         The theme for our image is: ${theme}
          

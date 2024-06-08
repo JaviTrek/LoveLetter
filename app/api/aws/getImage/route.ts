@@ -41,7 +41,7 @@ export async function GET(request: Request): Promise<Response> {
         }
         return null;
     } catch (err) {
-        console.error("Error", err);
+            console.error("Error", err);
         throw err;
     }
 }
