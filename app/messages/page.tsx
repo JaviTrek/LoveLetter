@@ -1,4 +1,4 @@
-import Menu from "../components/Menu";
+import Menu from "../components/messages/Menu";
 import {getUser} from "../lib";
 import {getBeboMessages, getMyMessages, message, user} from "../_database/messages";
 import {redirect} from "next/navigation";
@@ -11,25 +11,15 @@ export default async function Page() {
         redirect("/")
     }
 
-    const messages = await getBeboMessages(user) as message[]
-
-    messages.forEach(msg => {
-
-        msg._id = msg._id.toString();
-    })
-
-    //lets sort our dates
-
-    // @ts-ignore
-    messages.sort((a,b) => new Date(b.date) - new Date(a.date))
-
+    const beboMessages = await getBeboMessages(user) as message[]
+    const myMessages = await getMyMessages(user) as message[]
 
 
 
 
     return (
         <>
-            <Menu user={user} messages={messages}/>
+            <Menu user={user} beboMessages={beboMessages} myMessages={myMessages}/>
         </>
     )
 

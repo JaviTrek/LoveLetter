@@ -61,7 +61,21 @@ export async function getUserCollection(user:user) {
 export async function getMyMessages(user:user): Promise<message | message[]> {
 
     const col = await getUserCollection(user);
-    return await col.find().toArray() as message | message[];
+
+
+    const messages = await col.find().toArray() as  message[];
+    console.log(messages)
+
+    messages.forEach(msg => {
+        //@ts-ignore
+        msg._id = msg._id.toString();
+    })
+    //lets sort our dates so new ones are up
+    // @ts-ignore
+    messages.sort((a,b) => new Date(b.date) - new Date(a.date))
+
+    return messages;
+
 
 }
 
@@ -78,8 +92,17 @@ export async function getBeboMessages(user: user) {
         date: { $lt: today }
     };
 
-    return await col.find(query).toArray()
+    const messages =  await col.find(query).toArray()
 
+    messages.forEach(msg => {
+        //@ts-ignore
+        msg._id = msg._id.toString();
+    })
+    //lets sort our dates so new ones are up
+    // @ts-ignore
+    messages.sort((a,b) => new Date(b.date) - new Date(a.date))
+
+    return messages;
 }
 
 export async function updateMessageStatus(_id: string |ObjectId, user:user, status: "old" | "new") {

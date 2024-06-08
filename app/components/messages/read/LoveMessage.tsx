@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import Image from "next/image";
 import {ObjectId} from "mongodb";
-import {updateMessageStatus, user} from "../_database/messages";
+import {updateMessageStatus, user} from "../../../_database/messages";
 
 interface MessageProps {
     theme: string;
@@ -69,7 +69,7 @@ useEffect(()=> {
     }
 
     return (
-        <div className={`${display ? `fixed top-0 left-0  sm:p-4  h-full bg-black bg-opacity-80` : ""} w-full text-left mx-auto`} onClick={() => switchDisplay()}>
+        <div className={`${display ? `mx-auto fixed top-0 left-0  sm:p-4  h-full bg-black bg-opacity-80` : "max-w-[500px]"} w-full  text-left `} onClick={() => switchDisplay()}>
 
             <div className={`${colorVariants[colors]} flex  rounded-xl duration-300 cursor-pointer ${display ? "flex-col  sm:w-2/3  sm:py-4 p-6 sm:p-0" : ""} h-full   no-scrollbar overflow-auto  justify-start align-top  sm:mx-auto `} >
 

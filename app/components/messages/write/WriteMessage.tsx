@@ -1,5 +1,5 @@
 "use client"
-import {message, sendMessage, user} from "../_database/messages";
+import {message, sendMessage, user} from "../../../_database/messages";
 import {useState} from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,7 +9,7 @@ interface Props {
 
 export const maxDuration = 30;
 
-export default function CreateMessage({user: user}: Props) {
+export default function WriteMessage({user: user}: Props) {
 
     const today = new Date().toISOString().split('T')[0];
 
