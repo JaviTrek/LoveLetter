@@ -64,7 +64,7 @@ export async function getMyMessages(user:user): Promise<message | message[]> {
 
 
     const messages = await col.find().toArray() as  message[];
-    console.log(messages)
+    //console.log(messages)
 
     messages.forEach(msg => {
         //@ts-ignore

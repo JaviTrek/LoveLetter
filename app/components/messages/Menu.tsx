@@ -3,7 +3,6 @@
 import {useState} from "react";
 import WriteMessage from "./write/WriteMessage";
 import {message, user} from "../../_database/messages";
-import LoveMessage from "./read/LoveMessage";
 import {useRouter} from "next/navigation";
 import {setUser} from "../../lib";
 import ReadMessage from "./read/ReadMessage";
@@ -20,7 +19,6 @@ interface Props {
 export default function Menu({user, beboMessages, myMessages}: Props) {
     const router = useRouter()
 
-    console.log(myMessages)
 
     const [messageDisplay, setMessageDisplay] = useState("read")
 
@@ -30,7 +28,7 @@ export default function Menu({user, beboMessages, myMessages}: Props) {
 
 
                 <button
-                    className={`group  grow relative ${messageDisplay === "read" ? "bg-green-700" : "bg-green-700 brightness-50"}`}
+                    className={` rounded-none  group  grow relative ${messageDisplay === "read" ? "bg-green-700" : "bg-green-700 brightness-50"}`}
                     onClick={() => {
                         setMessageDisplay("read")
                     }}> Read Messages
@@ -38,7 +36,7 @@ export default function Menu({user, beboMessages, myMessages}: Props) {
 
 
                 <button
-                    className={`  relative grow ${messageDisplay === "write" ? "bg-green-700" : "bg-green-700 brightness-50"}`}
+                    className={` rounded-none relative grow ${messageDisplay === "write" ? "bg-green-700" : "bg-green-700 brightness-50"}`}
                     onClick={() => {
                         setMessageDisplay("write")
                     }}>
@@ -46,7 +44,7 @@ export default function Menu({user, beboMessages, myMessages}: Props) {
                 </button>
 
                 <button
-                    className={` bg-red-600 px-2 brightness-50 hover:brightness-100 text-sm`}
+                    className={`rounded-none  bg-red-600 px-2 brightness-50 hover:brightness-100 text-sm`}
                     onClick={async () => {
                         await setUser(null)
                         router.push("/")
@@ -61,10 +59,14 @@ export default function Menu({user, beboMessages, myMessages}: Props) {
 
             {messageDisplay === "read" ?
                <ReadMessage user={user} beboMessages={beboMessages} myMessages={myMessages}/>
-                :
 
+
+
+
+                :
                 //we are writing
                 <WriteMessage user={user}/>}
+
 
 
     </div>)
